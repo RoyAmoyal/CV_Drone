@@ -84,9 +84,9 @@ while True:
         img = yPID.draw(img, [cx, cy])
         # imgStacked = cvzone.stackImages([img, imgPlotX, imgPlotY, imgPlotZ], 2, 0.75)
         #imgStacked = cvzone.stackImages([img, imgPlotX], 2, 0.75)
-        imgStacked = cvzone.stackImages([img], 1, 1.5)
+        imgStacked = cvzone.stackImages([img], 1, 2)
     else:
-        imgStacked = cvzone.stackImages([img], 1, 1.5)
+        imgStacked = cvzone.stackImages([img], 1, 1.25)
 
         # cv2.putText(img, str(xVal), (50, 100), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3) # Px draw
         # cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
@@ -112,6 +112,7 @@ while True:
     cv2.imshow("AllImages", imgStacked)
     # cv2.imshow("Video", img)
     if cv2.waitKey(3) & 0xFF == ord('q'):
+        print(myDrone.get_battery())
         myDrone.streamoff()
         myDrone.land()
         break

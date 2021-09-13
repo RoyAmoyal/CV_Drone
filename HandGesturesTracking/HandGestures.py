@@ -1,6 +1,6 @@
 import cv2
 from djitellopy import tello
-from cvzone.HandTrackingModule import HandDetector
+from HandGesturesTracking.HandTrackingModule import HandDetector # Fixed
 from cvzone.FaceDetectionModule import FaceDetector
 import cvzone
 import time
@@ -93,16 +93,17 @@ while True:
                                   (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, f'{gesture}', (bboxRegion[0] + 15, bboxRegion[1] + bboxRegion[3] + 50),
                                 cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 0), 3)
-        cv2.resize(img,(1280,720))
+            cv2.resize(img,(1280,720))
         cv2.imshow("Video", img)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
         currtime = time.time()
-        if currtime - beginningTime > 120:
+        if currtime - beginningTime > 240:
             print("times up")
             myDrone.streamoff()
+            print(myDrone.get_battery())
             myDrone.land()
             break
     time.sleep(0.02)
